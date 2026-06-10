@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NASES Fashion Week — Vote Day Three</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>NASES Fashion Week — Day Three Final Vote</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -75,7 +75,7 @@
   }
   .hero-bg{
     position:absolute; inset:0;
-    background-image:url('assets/banner.jpg');
+    background-image:url('banner.jpg');
     background-size:cover;
     background-position:center 20%;
     filter:saturate(1.05);
@@ -219,73 +219,103 @@
 
   .contestants{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-    gap:32px;
+    grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+    gap:40px;
   }
   .card{
     position:relative;
     background:var(--void);
-    border-radius:22px;
+    border-radius:28px;
     overflow:hidden;
-    box-shadow:0 20px 50px -20px rgba(45,22,84,0.45);
+    box-shadow:0 20px 50px -20px rgba(45,22,84,0.55);
     transition:transform .4s ease, box-shadow .4s ease;
     display:flex; flex-direction:column;
   }
-  .card:hover{ transform:translateY(-8px); box-shadow:0 28px 60px -18px rgba(91,42,134,0.5); }
+  .card:hover{ transform:translateY(-8px); box-shadow:0 28px 60px -18px rgba(91,42,134,0.65); }
 
-  .card-photos{
-    position:relative;
-    display:grid;
-    grid-template-columns:1.3fr 1fr;
-    height:340px;
+  /* --- FOUR IMAGES GRID (clean, spaced, responsive) --- */
+  .card-imgs{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    background: rgba(0,0,0,0.2);
+    padding: 8px;
   }
-  .card-photos img{
-    width:100%; height:100%; object-fit:cover; display:block;
+  .card-imgs img{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 14px;
+    transition: transform 0.35s ease, filter 0.2s;
+    background: #120a1f;
+    box-shadow: 0 6px 12px -4px rgba(0,0,0,0.5);
   }
-  .card-photos .ph2{
-    border-left:3px solid var(--gold);
+  .card-imgs img:hover{
+    transform: scale(1.02);
+    filter: brightness(1.05);
   }
+  /* responsive: on narrow screens, become 2x2 grid but keep spacing */
+  @media (max-width: 560px){
+    .card-imgs{
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .contestants{
+      gap: 32px;
+    }
+  }
+  
   .card-number{
-    position:absolute; top:14px; left:14px; z-index:3;
+    position:absolute; top: 18px; left: 18px; z-index:10;
     font-family:'Playfair Display', serif;
     font-weight:900;
     font-size:2.4rem;
     color:var(--gold);
-    text-shadow:0 4px 20px rgba(0,0,0,0.6);
+    text-shadow:0 4px 16px rgba(0,0,0,0.7);
     line-height:1;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(4px);
+    padding: 0 10px 4px 10px;
+    border-radius: 40px;
+    letter-spacing: -0.5px;
   }
   .card-number small{
-    display:block; font-family:'Outfit',sans-serif; font-size:0.6rem;
-    letter-spacing:0.3em; text-transform:uppercase; color:var(--cream);
-    font-weight:700; margin-top:4px;
+    display:block; font-family:'Outfit',sans-serif; font-size:0.55rem;
+    letter-spacing:0.25em; text-transform:uppercase; color:var(--cream);
+    font-weight:700; margin-top:2px;
   }
+
   .card-body{
-    padding:24px 24px 26px;
+    padding: 20px 24px 26px;
     color:var(--cream);
     flex:1;
-    display:flex; flex-direction:column; gap:16px;
+    display:flex; flex-direction:column; gap:14px;
   }
   .card-body h3{
     font-family:'Playfair Display', serif;
     font-weight:700;
-    font-size:1.5rem;
+    font-size:1.6rem;
     letter-spacing:0.01em;
   }
   .card-body .look{
-    font-size:0.78rem;
-    letter-spacing:0.18em;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
     text-transform:uppercase;
     color:var(--gold);
     font-weight:600;
+    margin-bottom: 4px;
+    display: inline-block;
   }
 
-  /* spotlight runway bar */
+  /* runway bar */
   .runway{
     position:relative;
     height:10px;
     border-radius:999px;
     background:rgba(255,255,255,0.08);
     overflow:hidden;
+    margin: 6px 0 4px;
   }
   .runway-fill{
     position:absolute; inset:0 auto 0 0;
@@ -304,22 +334,22 @@
   .vote-row{
     display:flex; align-items:center; justify-content:space-between;
     gap:12px;
-    font-size:0.8rem;
-    color:rgba(247,241,255,0.7);
+    font-size:0.85rem;
+    color:rgba(247,241,255,0.75);
   }
   .vote-count{
-    font-weight:700;
+    font-weight:800;
     color:var(--cream);
     font-variant-numeric:tabular-nums;
   }
-  .vote-pct{ color:var(--gold); font-weight:700; }
+  .vote-pct{ color:var(--gold); font-weight:800; }
 
   .vote-btn{
-    margin-top:4px;
+    margin-top:8px;
     width:100%;
     padding:14px;
     border:none;
-    border-radius:12px;
+    border-radius:40px;
     background:linear-gradient(135deg, var(--accent), var(--royal));
     color:var(--cream);
     font-family:'Outfit', sans-serif;
@@ -329,75 +359,51 @@
     text-transform:uppercase;
     cursor:pointer;
     transition:transform .2s ease, box-shadow .2s ease, background .3s ease;
-    box-shadow:0 8px 24px -8px rgba(168,85,247,0.6);
+    box-shadow:0 8px 22px -8px rgba(168,85,247,0.6);
   }
-  .vote-btn:hover:not(:disabled){ transform:translateY(-2px); box-shadow:0 12px 30px -8px rgba(168,85,247,0.75); }
+  .vote-btn:hover:not(:disabled){ transform:translateY(-2px); box-shadow:0 12px 30px -8px rgba(168,85,247,0.8); background:linear-gradient(135deg, #b96eff, #7a32c3);}
   .vote-btn:active:not(:disabled){ transform:translateY(0); }
   .vote-btn:disabled{
-    background:rgba(255,255,255,0.06);
+    background:rgba(255,255,255,0.08);
     color:rgba(247,241,255,0.4);
     cursor:default;
     box-shadow:none;
   }
   .vote-btn.voted-this{
-    background:linear-gradient(135deg, var(--gold), #ffaa00);
+    background:linear-gradient(135deg, var(--gold), #ffbb2e);
     color:var(--void);
-    box-shadow:0 8px 24px -8px rgba(255,201,77,0.7);
+    box-shadow:0 8px 24px -8px rgba(255,201,77,0.8);
   }
 
-  /* ---------- GALLERY ---------- */
-  .gallery-wrap{ background:var(--void); padding:100px 0; }
-  .gallery-wrap .section-head h2{ color:var(--cream); }
-  .gallery-wrap .section-head .tag{ color:var(--gold); }
-  .gallery-wrap .section-head p{ color:rgba(247,241,255,0.6); }
-  .gallery{
-    max-width:1200px; margin:0 auto; padding:0 24px;
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    grid-auto-rows:160px;
-    gap:10px;
-  }
-  .gallery img{
-    width:100%; height:100%; object-fit:cover;
-    border-radius:8px;
-    transition:transform .5s ease, filter .5s ease;
-    filter:saturate(0.9);
-  }
-  .gallery img:hover{ transform:scale(1.04); filter:saturate(1.15); }
-  .gallery .tall{ grid-row:span 2; }
-  @media (max-width:780px){
-    .gallery{ grid-template-columns:repeat(2,1fr); grid-auto-rows:160px; }
-  }
-
-  /* ---------- FOOTER ---------- */
+  /* FOOTER */
   footer{
     background:linear-gradient(180deg, var(--void), var(--deep));
     color:rgba(247,241,255,0.7);
     text-align:center;
-    padding:64px 24px 40px;
+    padding:64px 24px 48px;
+    margin-top: 20px;
   }
-  footer .flogo{ height:54px; width:54px; border-radius:50%; object-fit:cover; margin-bottom:18px; }
+  footer .flogo{ height:56px; width:56px; border-radius:50%; object-fit:cover; margin-bottom:18px; border: 2px solid var(--gold);}
   footer h3{
     font-family:'Playfair Display', serif;
     color:var(--cream);
     font-size:1.3rem;
     letter-spacing:0.06em;
-    margin-bottom:6px;
+    margin-bottom:8px;
   }
-  footer p{ font-size:0.85rem; max-width:420px; margin:0 auto; line-height:1.7;}
+  footer p{ font-size:0.85rem; max-width:440px; margin:0 auto; line-height:1.7;}
   footer .tagline{
-    margin-top:18px;
+    margin-top:22px;
     font-size:0.7rem;
     letter-spacing:0.3em;
     text-transform:uppercase;
     color:var(--gold);
   }
 
-  /* responsive */
   @media (max-width:560px){
-    .card-photos{ height:260px; }
-    .card-number{ font-size:1.8rem; }
     .section{ padding:70px 18px; }
+    .card-body h3{ font-size:1.3rem; }
+    .card-number{ font-size:1.9rem; top:12px; left:12px; }
   }
 </style>
 </head>
@@ -411,13 +417,13 @@
   <a href="#vote">Vote Now</a>
 </div>
 
-<!-- HERO -->
+<!-- HERO SECTION -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <span class="hero-eyebrow">University of Uyo · Software Engineering</span>
+    <span class="hero-eyebrow">University of Uyo · Faculty of Computing</span>
     <h1>Fashion<br>Week<em>Day Three · Final Walk</em></h1>
-    <p class="sub">Tomorrow the runway closes. Four contestants, one title — cast your vote for the look that owns the stage.</p>
+    <p class="sub">Tomorrow the runway closes. Four icons, one crown — cast your vote for the look that commands the stage.</p>
     <div class="hero-meta">
       <span class="pill">Venue · <b>ICT 2</b></span>
       <span class="pill">Time · <b>12:00 Noon</b></span>
@@ -425,32 +431,35 @@
     </div>
   </div>
   <div class="scroll-cue">
-    <span>Meet the contestants</span>
+    <span>MEET THE FINALISTS</span>
     <span class="line"></span>
   </div>
 </section>
 
-<!-- VOTING -->
+<!-- VOTING SECTION -->
 <section class="section" id="vote">
   <div class="section-head">
     <span class="tag">Live Poll · Day Three</span>
-    <h2>Cast your <span>one</span> vote</h2>
-    <p>Pick the contestant you want to see win Day Three. Your choice is private — only the running totals are shown to everyone.</p>
+    <h2>Your <span>one</span> vote defines the runway</h2>
+    <p>Four contestants, four distinct stories. Each finalist brings four signature looks. Your vote crowns the winner — real-time results below.</p>
   </div>
 
   <div class="vote-status" id="voteStatus">Loading poll…</div>
 
   <div class="contestants" id="contestants">
-    <!-- Contestant 1 -->
+    
+    <!-- CONTESTANT 1 : images c1a, c1b, c2a, c2b -->
     <article class="card" data-id="c1">
-      <div class="card-photos">
+      <div class="card-imgs">
         <span class="card-number">01<small>Contestant</small></span>
-        <img src="c1a.jpg" alt="Contestant 1, look one">
-        <img class="ph2" src="c1b.jpg" alt="Contestant 1, look two">
+        <img src="c1a.jpg" alt="Contestant one look 1">
+        <img src="c1b.jpg" alt="Contestant one look 2">
+        <img src="c2a.jpg" alt="Contestant one look 3">
+        <img src="c2b.jpg" alt="Contestant one look 4">
       </div>
       <div class="card-body">
         <div>
-          <span class="look">Day Three Look</span>
+          <span class="look">Day Three · Capsule Collection</span>
           <h3>Contestant One</h3>
         </div>
         <div class="runway"><div class="runway-fill" data-fill="c1"></div></div>
@@ -462,16 +471,18 @@
       </div>
     </article>
 
-    <!-- Contestant 2 -->
+    <!-- CONTESTANT 2 : images c3a, c3b, c4a, c4b -->
     <article class="card" data-id="c2">
-      <div class="card-photos">
+      <div class="card-imgs">
         <span class="card-number">02<small>Contestant</small></span>
-        <img src="c2a.jpg" alt="Contestant 2, look one">
-        <img class="ph2" src="c2b.jpg" alt="Contestant 2, look two">
+        <img src="c3a.jpg" alt="Contestant two look 1">
+        <img src="c3b.jpg" alt="Contestant two look 2">
+        <img src="c4a.jpg" alt="Contestant two look 3">
+        <img src="c4b.jpg" alt="Contestant two look 4">
       </div>
       <div class="card-body">
         <div>
-          <span class="look">Day Three Look</span>
+          <span class="look">Day Three · Capsule Collection</span>
           <h3>Contestant Two</h3>
         </div>
         <div class="runway"><div class="runway-fill" data-fill="c2"></div></div>
@@ -483,16 +494,18 @@
       </div>
     </article>
 
-    <!-- Contestant 3 -->
+    <!-- CONTESTANT 3 : images g1, g2, g3, g4 -->
     <article class="card" data-id="c3">
-      <div class="card-photos">
+      <div class="card-imgs">
         <span class="card-number">03<small>Contestant</small></span>
-        <img src="c3a.jpg" alt="Contestant 3, look one">
-        <img class="ph2" src="c3b.jpg" alt="Contestant 3, look two">
+        <img src="g1.jpg" alt="Contestant three look 1">
+        <img src="g2.jpg" alt="Contestant three look 2">
+        <img src="g3.jpg" alt="Contestant three look 3">
+        <img src="g4.jpg" alt="Contestant three look 4">
       </div>
       <div class="card-body">
         <div>
-          <span class="look">Day Three Look</span>
+          <span class="look">Day Three · Capsule Collection</span>
           <h3>Contestant Three</h3>
         </div>
         <div class="runway"><div class="runway-fill" data-fill="c3"></div></div>
@@ -504,16 +517,18 @@
       </div>
     </article>
 
-    <!-- Contestant 4 -->
+    <!-- CONTESTANT 4 : images g5, g6, g7, g8 -->
     <article class="card" data-id="c4">
-      <div class="card-photos">
+      <div class="card-imgs">
         <span class="card-number">04<small>Contestant</small></span>
-        <img src="c4a.jpg" alt="Contestant 4, look one">
-        <img class="ph2" src="c4b.jpg" alt="Contestant 4, look two">
+        <img src="g5.jpg" alt="Contestant four look 1">
+        <img src="g6.jpg" alt="Contestant four look 2">
+        <img src="g7.jpg" alt="Contestant four look 3">
+        <img src="g8.jpg" alt="Contestant four look 4">
       </div>
       <div class="card-body">
         <div>
-          <span class="look">Day Three Look</span>
+          <span class="look">Day Three · Capsule Collection</span>
           <h3>Contestant Four</h3>
         </div>
         <div class="runway"><div class="runway-fill" data-fill="c4"></div></div>
@@ -527,31 +542,11 @@
   </div>
 </section>
 
-<!-- GALLERY -->
-<div class="gallery-wrap">
-  <div class="section-head">
-    <span class="tag">Behind the Walk</span>
-    <h2>Moments from <span>Fashion Week</span></h2>
-    <p>A look back at the styling, the poise, and the energy backstage.</p>
-  </div>
-  <div class="gallery">
-    <img class="tall" src="g1.jpg" alt="Backstage moment">
-    <img src="g2.jpg" alt="Backstage moment">
-    <img src="g3.jpg" alt="Backstage moment">
-    <img class="tall" src="4.jpg" alt="Backstage moment">
-    <img src="g5.jpg" alt="Backstage moment">
-    <img src="g6.jpg" alt="Backstage moment">
-    <img class="tall" src="g7.jpg" alt="Backstage moment">
-    <img src="g8.jpg" alt="Backstage moment">
-  </div>
-</div>
-
 <footer>
   <img class="flogo" src="logo.png" alt="NASES logo">
   <h3>NASES — Faculty of Computing</h3>
-  <p>National Association of Software Engineering Students, University of Uyo. Fashion Week is presented in partnership with the Faculty of Computing.</p>
+  <p>National Association of Software Engineering Students, University of Uyo. Fashion Week finale presented in partnership with the Faculty of Computing.</p>
   <div class="tagline">…creating tomorrow's software…</div>
-
   <em>@Ghost🎩👾</em>
 </footer>
 
@@ -578,73 +573,89 @@
   const votesRef = ref(db, 'fashionWeekVotes');
 
   function render(counts, votedFor){
-    const c = {c1:0,c2:0,c3:0,c4:0, ...counts};
-    const total = IDS.reduce((s,id)=> s + (c[id]||0), 0);
+    const safeCounts = {c1:0,c2:0,c3:0,c4:0, ...counts};
+    const total = IDS.reduce((sum, id) => sum + (safeCounts[id] || 0), 0);
 
-    IDS.forEach(id=>{
-      const count = c[id] || 0;
+    IDS.forEach(id => {
+      const count = safeCounts[id] || 0;
       const pct = total > 0 ? Math.round((count/total)*100) : 0;
-      document.querySelector(`[data-count="${id}"]`).textContent = count;
-      document.querySelector(`[data-pct="${id}"]`).textContent = pct + '%';
-      document.querySelector(`[data-fill="${id}"]`).style.width = pct + '%';
+      const countSpan = document.querySelector(`[data-count="${id}"]`);
+      const pctSpan = document.querySelector(`[data-pct="${id}"]`);
+      const fillDiv = document.querySelector(`[data-fill="${id}"]`);
+      if(countSpan) countSpan.textContent = count;
+      if(pctSpan) pctSpan.textContent = pct + '%';
+      if(fillDiv) fillDiv.style.width = pct + '%';
 
       const btn = document.querySelector(`[data-vote="${id}"]`);
-      if(votedFor){
-        btn.disabled = true;
-        if(id === votedFor){
-          btn.textContent = '\u2713 Your Vote';
-          btn.classList.add('voted-this');
+      if(btn) {
+        if(votedFor){
+          btn.disabled = true;
+          if(id === votedFor){
+            btn.textContent = '✓ YOUR VOTE';
+            btn.classList.add('voted-this');
+          } else {
+            btn.textContent = 'VOTE RECORDED';
+            btn.classList.remove('voted-this');
+          }
         } else {
-          btn.textContent = 'Vote Recorded';
+          btn.disabled = false;
+          btn.textContent = `VOTE CONTESTANT ${id.slice(1)}`;
           btn.classList.remove('voted-this');
         }
-      } else {
-        btn.disabled = false;
-        btn.textContent = `Vote Contestant ${id.slice(1)}`;
-        btn.classList.remove('voted-this');
       }
     });
 
-    const status = document.getElementById('voteStatus');
-    if(votedFor){
-      status.textContent = `Thanks for voting! ${total} total vote${total===1?'':'s'} cast so far.`;
-      status.classList.add('voted');
-    } else {
-      status.textContent = `${total} total vote${total===1?'':'s'} cast so far. Pick your favourite below.`;
-      status.classList.remove('voted');
+  const statusDiv = document.getElementById('voteStatus');
+    if(statusDiv) {
+      if(votedFor){
+        statusDiv.textContent = `✨ Thanks for voting! ${total} total vote${total===1?'':'s'} cast so far. ✨`;
+        statusDiv.classList.add('voted');
+      } else {
+        statusDiv.textContent = `🔥 ${total} total vote${total===1?'':'s'} live. Cast your vote below — every voice counts! 🔥`;
+        statusDiv.classList.remove('voted');
+      }
     }
   }
 
   function init(){
-    const votedFor = localStorage.getItem(VOTED_KEY);
+    const storedVote = localStorage.getItem(VOTED_KEY);
 
-    // live listener: updates everyone's screen instantly when any vote is cast
+    // realtime listener for live updates
     onValue(votesRef, (snapshot) => {
       const counts = snapshot.val() || {};
       render(counts, localStorage.getItem(VOTED_KEY));
     }, (err) => {
       console.error('Firebase read error:', err);
-      document.getElementById('voteStatus').textContent =
-        'Could not load live results. Please check your connection and refresh.';
+      const status = document.getElementById('voteStatus');
+      if(status) status.textContent = '⚠️ Could not load live results. Refresh or check connection. ⚠️';
     });
 
-    document.querySelectorAll('[data-vote]').forEach(btn=>{
-      btn.addEventListener('click', () => {
+    // attach vote clicks
+    document.querySelectorAll('[data-vote]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
         if(localStorage.getItem(VOTED_KEY)) return;
         const id = btn.dataset.vote;
+        if(!id) return;
 
-        document.querySelectorAll('[data-vote]').forEach(b=> b.disabled = true);
-
+        // disable all temporarily to avoid double clicks
+        document.querySelectorAll('[data-vote]').forEach(b => b.disabled = true);
+        
         const candidateRef = ref(db, `fashionWeekVotes/${id}`);
         runTransaction(candidateRef, (current) => (current || 0) + 1)
           .then(() => {
             localStorage.setItem(VOTED_KEY, id);
+            // update UI immediately after local storage set
+            const freshSnapshot = await? not needed, onValue will update, but also we show locally
+            const countsSnap = await new Promise(resolve => {
+              onValue(votesRef, resolve, { onlyOnce: true });
+            });
+            if(countsSnap.exists()) render(countsSnap.val(), id);
+            else render({}, id);
           })
           .catch((err) => {
-            console.error('Vote failed:', err);
-            document.getElementById('voteStatus').textContent =
-              'Your vote could not be saved. Please try again.';
-            document.querySelectorAll('[data-vote]').forEach(b=> b.disabled = false);
+            console.error('Vote transaction failed:', err);
+            document.getElementById('voteStatus').textContent = '❌ Your vote could not be saved. Please try again later.';
+            document.querySelectorAll('[data-vote]').forEach(b => b.disabled = false);
           });
       });
     });
@@ -652,6 +663,5 @@
 
   init();
 </script>
-
 </body>
 </html>
