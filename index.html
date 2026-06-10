@@ -219,7 +219,7 @@
 
   .contestants{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
     gap:40px;
   }
   .card{
@@ -233,33 +233,34 @@
   }
   .card:hover{ transform:translateY(-8px); box-shadow:0 28px 60px -18px rgba(91,42,134,0.65); }
 
-  /* --- FOUR IMAGES GRID (clean, spaced, responsive) --- */
+  /* --- FOUR IMAGES GRID (spaced, responsive, each contestant gets 4 images) --- */
   .card-imgs{
     position: relative;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
+    gap: 8px;
     background: rgba(0,0,0,0.2);
-    padding: 8px;
+    padding: 12px;
   }
   .card-imgs img{
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 14px;
-    transition: transform 0.35s ease, filter 0.2s;
-    background: #120a1f;
-    box-shadow: 0 6px 12px -4px rgba(0,0,0,0.5);
+    border-radius: 16px;
+    transition: transform 0.3s ease, filter 0.2s;
+    background: #130b21;
+    box-shadow: 0 6px 14px -4px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,201,77,0.2);
   }
   .card-imgs img:hover{
     transform: scale(1.02);
-    filter: brightness(1.05);
+    filter: brightness(1.08);
+    border-color: var(--gold);
   }
-  /* responsive: on narrow screens, become 2x2 grid but keep spacing */
-  @media (max-width: 560px){
+  @media (max-width: 600px){
     .card-imgs{
       grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
+      gap: 10px;
     }
     .contestants{
       gap: 32px;
@@ -274,9 +275,9 @@
     color:var(--gold);
     text-shadow:0 4px 16px rgba(0,0,0,0.7);
     line-height:1;
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(4px);
-    padding: 0 10px 4px 10px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(6px);
+    padding: 0 12px 4px 12px;
     border-radius: 40px;
     letter-spacing: -0.5px;
   }
@@ -315,7 +316,7 @@
     border-radius:999px;
     background:rgba(255,255,255,0.08);
     overflow:hidden;
-    margin: 6px 0 4px;
+    margin: 8px 0 4px;
   }
   .runway-fill{
     position:absolute; inset:0 auto 0 0;
@@ -323,7 +324,7 @@
     border-radius:999px;
     background:linear-gradient(90deg, var(--accent), var(--gold));
     box-shadow:0 0 18px rgba(255,201,77,0.55);
-    transition:width 1s cubic-bezier(.22,1,.36,1);
+    transition:width 0.8s cubic-bezier(0.22,1,0.36,1);
   }
   .runway-fill::after{
     content:'';
@@ -345,11 +346,11 @@
   .vote-pct{ color:var(--gold); font-weight:800; }
 
   .vote-btn{
-    margin-top:8px;
+    margin-top:10px;
     width:100%;
     padding:14px;
     border:none;
-    border-radius:40px;
+    border-radius:44px;
     background:linear-gradient(135deg, var(--accent), var(--royal));
     color:var(--cream);
     font-family:'Outfit', sans-serif;
@@ -361,7 +362,7 @@
     transition:transform .2s ease, box-shadow .2s ease, background .3s ease;
     box-shadow:0 8px 22px -8px rgba(168,85,247,0.6);
   }
-  .vote-btn:hover:not(:disabled){ transform:translateY(-2px); box-shadow:0 12px 30px -8px rgba(168,85,247,0.8); background:linear-gradient(135deg, #b96eff, #7a32c3);}
+  .vote-btn:hover:not(:disabled){ transform:translateY(-3px); box-shadow:0 12px 30px -8px rgba(168,85,247,0.8); background:linear-gradient(135deg, #bd6aff, #8735db);}
   .vote-btn:active:not(:disabled){ transform:translateY(0); }
   .vote-btn:disabled{
     background:rgba(255,255,255,0.08);
@@ -423,7 +424,7 @@
   <div class="hero-content">
     <span class="hero-eyebrow">University of Uyo · Faculty of Computing</span>
     <h1>Fashion<br>Week<em>Day Three · Final Walk</em></h1>
-    <p class="sub">Tomorrow the runway closes. Four icons, one crown — cast your vote for the look that commands the stage.</p>
+    <p class="sub">Four finalists, four complete looks each. The runway chooses its champion — your vote decides the winner. Live totals update instantly.</p>
     <div class="hero-meta">
       <span class="pill">Venue · <b>ICT 2</b></span>
       <span class="pill">Time · <b>12:00 Noon</b></span>
@@ -441,25 +442,25 @@
   <div class="section-head">
     <span class="tag">Live Poll · Day Three</span>
     <h2>Your <span>one</span> vote defines the runway</h2>
-    <p>Four contestants, four distinct stories. Each finalist brings four signature looks. Your vote crowns the winner — real-time results below.</p>
+    <p>Each contestant brings four distinctive looks. After you vote, the bars update in real time — everyone sees the race live.</p>
   </div>
 
-  <div class="vote-status" id="voteStatus">Loading poll…</div>
+  <div class="vote-status" id="voteStatus">Loading live poll...</div>
 
   <div class="contestants" id="contestants">
     
-    <!-- CONTESTANT 1 : images c1a, c1b, c2a, c2b -->
+    <!-- CONTESTANT 1 : 4 images: c1a, c1b, c2a, c2b -->
     <article class="card" data-id="c1">
       <div class="card-imgs">
         <span class="card-number">01<small>Contestant💜</small></span>
-        <img src="c1a.jpg" alt="Contestant one look 1">
-        <img src="c1b.jpg" alt="Contestant one look 2">
-        <img src="c2a.jpg" alt="Contestant one look 3">
-        <img src="c2b.jpg" alt="Contestant one look 4">
+        <img src="c1a.jpg" alt="Contestant 1 look 1">
+        <img src="c1b.jpg" alt="Contestant 1 look 2">
+        <img src="c2a.jpg" alt="Contestant 1 look 3">
+        <img src="c2b.jpg" alt="Contestant 1 look 4">
       </div>
       <div class="card-body">
         <div>
-          <span class="look">Day Three · Capsule Collection</span>
+          <span class="look">Day Three · 4-Look Editorial</span>
           <h3>Contestant One</h3>
         </div>
         <div class="runway"><div class="runway-fill" data-fill="c1"></div></div>
@@ -471,18 +472,18 @@
       </div>
     </article>
 
-    <!-- CONTESTANT 2 : images c3a, c3b, c4a, c4b -->
+    <!-- CONTESTANT 2 : 4 images: c3a, c3b, c4a, c4b -->
     <article class="card" data-id="c2">
       <div class="card-imgs">
         <span class="card-number">02<small>Contestant💜</small></span>
-        <img src="c3a.jpg" alt="Contestant two look 1">
-        <img src="c3b.jpg" alt="Contestant two look 2">
-        <img src="c4a.jpg" alt="Contestant two look 3">
-        <img src="c4b.jpg" alt="Contestant two look 4">
+        <img src="c3a.jpg" alt="Contestant 2 look 1">
+        <img src="c3b.jpg" alt="Contestant 2 look 2">
+        <img src="c4a.jpg" alt="Contestant 2 look 3">
+        <img src="c4b.jpg" alt="Contestant 2 look 4">
       </div>
       <div class="card-body">
         <div>
-          <span class="look">Day Three · Capsule Collection</span>
+          <span class="look">Day Three · 4-Look Editorial</span>
           <h3>Contestant Two</h3>
         </div>
         <div class="runway"><div class="runway-fill" data-fill="c2"></div></div>
@@ -494,18 +495,18 @@
       </div>
     </article>
 
-    <!-- CONTESTANT 3 : images g1, g2, g3, g4 -->
+    <!-- CONTESTANT 3 : 4 images: g1, g2, g3, g4 -->
     <article class="card" data-id="c3">
       <div class="card-imgs">
         <span class="card-number">03<small>Contestant💜</small></span>
-        <img src="g1.jpg" alt="Contestant three look 1">
-        <img src="g2.jpg" alt="Contestant three look 2">
-        <img src="g3.jpg" alt="Contestant three look 3">
-        <img src="g4.jpg" alt="Contestant three look 4">
+        <img src="g1.jpg" alt="Contestant 3 look 1">
+        <img src="g2.jpg" alt="Contestant 3 look 2">
+        <img src="g3.jpg" alt="Contestant 3 look 3">
+        <img src="g4.jpg" alt="Contestant 3 look 4">
       </div>
       <div class="card-body">
         <div>
-          <span class="look">Day Three · Capsule Collection</span>
+          <span class="look">Day Three · 4-Look Editorial</span>
           <h3>Contestant Three</h3>
         </div>
         <div class="runway"><div class="runway-fill" data-fill="c3"></div></div>
@@ -517,18 +518,18 @@
       </div>
     </article>
 
-    <!-- CONTESTANT 4 : images g5, g6, g7, g8 -->
+    <!-- CONTESTANT 4 : 4 images: g5, g6, g7, g8 -->
     <article class="card" data-id="c4">
       <div class="card-imgs">
         <span class="card-number">04<small>Contestant💜</small></span>
-        <img src="g5.jpg" alt="Contestant four look 1">
-        <img src="g6.jpg" alt="Contestant four look 2">
-        <img src="g7.jpg" alt="Contestant four look 3">
-        <img src="g8.jpg" alt="Contestant four look 4">
+        <img src="g5.jpg" alt="Contestant 4 look 1">
+        <img src="g6.jpg" alt="Contestant 4 look 2">
+        <img src="g7.jpg" alt="Contestant 4 look 3">
+        <img src="g8.jpg" alt="Contestant 4 look 4">
       </div>
       <div class="card-body">
         <div>
-          <span class="look">Day Three · Capsule Collection</span>
+          <span class="look">Day Three · 4-Look Editorial</span>
           <h3>Contestant Four</h3>
         </div>
         <div class="runway"><div class="runway-fill" data-fill="c4"></div></div>
@@ -545,9 +546,9 @@
 <footer>
   <img class="flogo" src="logo.png" alt="NASES logo">
   <h3>NASES — Faculty of Computing</h3>
-  <p>National Association of Software Engineering Students, University of Uyo. Fashion Week finale presented in partnership with the Faculty of Computing.</p>
+  <p>National Association of Software Engineering Students, University of Uyo. Fashion Week finale — powered by your voice.</p>
   <div class="tagline">…creating tomorrow's software…</div>
-  <em>@Ghost🎩👾</em>
+  <em>@Ghost👾🎩</em>
 </footer>
 
 <script type="module">
@@ -572,29 +573,31 @@
   const VOTED_KEY = 'nases_fashionweek_voted';
   const votesRef = ref(db, 'fashionWeekVotes');
 
-  function render(counts, votedFor){
-    const safeCounts = {c1:0,c2:0,c3:0,c4:0, ...counts};
-    const total = IDS.reduce((sum, id) => sum + (safeCounts[id] || 0), 0);
+  // Render function: updates vote counts, percentages, progress bars, button states & status message
+  function render(counts, votedFor) {
+    const safe = { c1:0, c2:0, c3:0, c4:0, ...counts };
+    const total = IDS.reduce((sum, id) => sum + (safe[id] || 0), 0);
 
     IDS.forEach(id => {
-      const count = safeCounts[id] || 0;
-      const pct = total > 0 ? Math.round((count/total)*100) : 0;
+      const count = safe[id] || 0;
+      const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+      
       const countSpan = document.querySelector(`[data-count="${id}"]`);
       const pctSpan = document.querySelector(`[data-pct="${id}"]`);
       const fillDiv = document.querySelector(`[data-fill="${id}"]`);
-      if(countSpan) countSpan.textContent = count;
-      if(pctSpan) pctSpan.textContent = pct + '%';
-      if(fillDiv) fillDiv.style.width = pct + '%';
+      if (countSpan) countSpan.textContent = count;
+      if (pctSpan) pctSpan.textContent = pct + '%';
+      if (fillDiv) fillDiv.style.width = pct + '%';
 
       const btn = document.querySelector(`[data-vote="${id}"]`);
-      if(btn) {
-        if(votedFor){
+      if (btn) {
+        if (votedFor) {
           btn.disabled = true;
-          if(id === votedFor){
-            btn.textContent = '✓ YOUR VOTE';
+          if (id === votedFor) {
+            btn.textContent = '✓ YOUR VOTE ✓';
             btn.classList.add('voted-this');
           } else {
-            btn.textContent = 'VOTE RECORDED';
+            btn.textContent = 'VOTE CAST';
             btn.classList.remove('voted-this');
           }
         } else {
@@ -605,58 +608,69 @@
       }
     });
 
-  const statusDiv = document.getElementById('voteStatus');
-    if(statusDiv) {
-      if(votedFor){
-        statusDiv.textContent = `✨ Thanks for voting! ${total} total vote${total===1?'':'s'} cast so far. ✨`;
+    const statusDiv = document.getElementById('voteStatus');
+    if (statusDiv) {
+      if (votedFor) {
+        statusDiv.textContent = `✨ You voted! ${total} total vote${total === 1 ? '' : 's'} so far. Live results below. ✨`;
         statusDiv.classList.add('voted');
       } else {
-        statusDiv.textContent = `🔥 ${total} total vote${total===1?'':'s'} live. Cast your vote below — every voice counts! 🔥`;
+        statusDiv.textContent = `🔥 ${total} live vote${total === 1 ? '' : 's'} registered. Cast yours — one vote per person. 🔥`;
         statusDiv.classList.remove('voted');
       }
     }
   }
 
-  function init(){
+  // MAIN INIT
+  function init() {
     const storedVote = localStorage.getItem(VOTED_KEY);
 
-    // realtime listener for live updates
+    // Real-time listener: any vote update will instantly refresh UI
     onValue(votesRef, (snapshot) => {
       const counts = snapshot.val() || {};
       render(counts, localStorage.getItem(VOTED_KEY));
-    }, (err) => {
-      console.error('Firebase read error:', err);
-      const status = document.getElementById('voteStatus');
-      if(status) status.textContent = '⚠️ Could not load live results. Refresh or check connection. ⚠️';
+    }, (error) => {
+      console.error("Firebase read failed:", error);
+      const statusDiv = document.getElementById('voteStatus');
+      if (statusDiv) statusDiv.textContent = '⚠️ Connection issue. Refresh page or check network. ⚠️';
     });
 
-    // attach vote clicks
+    // Attach click handlers to vote buttons
     document.querySelectorAll('[data-vote]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        if(localStorage.getItem(VOTED_KEY)) return;
-        const id = btn.dataset.vote;
-        if(!id) return;
-
-        // disable all temporarily to avoid double clicks
-        document.querySelectorAll('[data-vote]').forEach(b => b.disabled = true);
+      btn.addEventListener('click', async (e) => {
+        // Prevent double voting
+        if (localStorage.getItem(VOTED_KEY)) {
+          alert("You have already voted. One vote per person.");
+          return;
+        }
         
-        const candidateRef = ref(db, `fashionWeekVotes/${id}`);
-        runTransaction(candidateRef, (current) => (current || 0) + 1)
-          .then(() => {
-            localStorage.setItem(VOTED_KEY, id);
-            // update UI immediately after local storage set
-            const freshSnapshot = await? not needed, onValue will update, but also we show locally
-            const countsSnap = await new Promise(resolve => {
-              onValue(votesRef, resolve, { onlyOnce: true });
-            });
-            if(countsSnap.exists()) render(countsSnap.val(), id);
-            else render({}, id);
-          })
-          .catch((err) => {
-            console.error('Vote transaction failed:', err);
-            document.getElementById('voteStatus').textContent = '❌ Your vote could not be saved. Please try again later.';
-            document.querySelectorAll('[data-vote]').forEach(b => b.disabled = false);
+        const id = btn.dataset.vote;
+        if (!id) return;
+
+        // disable all buttons temporarily to avoid double submission
+        const allBtns = document.querySelectorAll('[data-vote]');
+        allBtns.forEach(b => b.disabled = true);
+        
+        try {
+          const candidateRef = ref(db, `fashionWeekVotes/${id}`);
+          // atomic increment
+          await runTransaction(candidateRef, (current) => (current || 0) + 1);
+          // mark as voted in localStorage
+          localStorage.setItem(VOTED_KEY, id);
+          // No extra fetch needed: onValue will pick the new snapshot and re-render
+          // But we manually trigger a quick render to avoid any delay flicker
+          const freshSnapshot = await new Promise((resolve) => {
+            onValue(votesRef, resolve, { onlyOnce: true });
           });
+          const updatedCounts = freshSnapshot.val() || {};
+          render(updatedCounts, id);
+        } catch (err) {
+          console.error("Vote transaction failed:", err);
+          document.getElementById('voteStatus').textContent = '❌ Vote could not be saved. Please try again.';
+          // re-enable buttons only if still not voted
+          if (!localStorage.getItem(VOTED_KEY)) {
+            document.querySelectorAll('[data-vote]').forEach(b => b.disabled = false);
+          }
+        }
       });
     });
   }
