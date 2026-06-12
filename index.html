@@ -408,150 +408,7 @@
     .card-number{ font-size:1.9rem; top:12px; left:12px; }
   }
 </style>
-  <script>
 
-    setTimeout(function() {
-  (function continuousCelebration() {
-    // ... confetti code ...
-  })();
-}, 5000);
-
-    (function continuousCelebration() {
-  // ---- Persistent message ----
-  const msgDiv = document.createElement('div');
-  msgDiv.textContent = "🏆 Congratulations Contestant 3 💜🤗🎉🥳🥳🥳 🏆";
-  msgDiv.style.position = 'fixed';
-  msgDiv.style.bottom = '20px';
-  msgDiv.style.left = '50%';
-  msgDiv.style.transform = 'translateX(-50%)';
-  msgDiv.style.background = 'linear-gradient(135deg, #a855f7, #ffc94d)';
-  msgDiv.style.color = '#1a0b2e';
-  msgDiv.style.padding = '12px 28px';
-  msgDiv.style.borderRadius = '60px';
-  msgDiv.style.fontFamily = "'Outfit', sans-serif";
-  msgDiv.style.fontWeight = 'bold';
-  msgDiv.style.fontSize = 'clamp(1rem, 4vw, 1.6rem)';
-  msgDiv.style.textAlign = 'center';
-  msgDiv.style.zIndex = '9999';
-  msgDiv.style.boxShadow = '0 0 20px rgba(255,201,77,0.8)';
-  msgDiv.style.border = '2px solid gold';
-  msgDiv.style.whiteSpace = 'nowrap';
-  msgDiv.style.animation = 'glowPulse 1.5s infinite';
-  document.body.appendChild(msgDiv);
-
-  // add a simple pulse animation
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes glowPulse {
-      0% { box-shadow: 0 0 5px rgba(255,201,77,0.5); transform: translateX(-50%) scale(1); }
-      50% { box-shadow: 0 0 25px rgba(255,201,77,1); transform: translateX(-50%) scale(1.02); }
-      100% { box-shadow: 0 0 5px rgba(255,201,77,0.5); transform: translateX(-50%) scale(1); }
-    }
-  `;
-  document.head.appendChild(style);
-
-  // ---- CANVAS CONFETTI (never stops) ----
-  const canvas = document.createElement('canvas');
-  canvas.style.position = 'fixed';
-  canvas.style.top = '0';
-  canvas.style.left = '0';
-  canvas.style.width = '100%';
-  canvas.style.height = '100%';
-  canvas.style.pointerEvents = 'none';
-  canvas.style.zIndex = '9998';
-  document.body.appendChild(canvas);
-
-  let width = window.innerWidth;
-  let height = window.innerHeight;
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext('2d');
-
-  // Colors (vibrant)
-  const colors = ['#ffc94d', '#a855f7', '#ff6b6b', '#4ecdc4', '#ffe66d', '#b92b27', '#1565c0', '#e91e63', '#ffb74d', '#f0f0f0', '#ffaa44'];
-
-  class SharpParticle {
-    constructor() {
-      this.x = Math.random() * width;
-      this.y = Math.random() * -height; // start above
-      this.w = Math.random() * 14 + 6;   // 6..20px
-      this.h = Math.random() * 14 + 6;   // square or rectangle
-      this.rot = Math.random() * 360;
-      this.rotSpeed = (Math.random() - 0.5) * 8;
-      this.speedY = Math.random() * 5 + 2;  // falling speed 2..7
-      this.speedX = (Math.random() - 0.5) * 3;
-      this.color = colors[Math.floor(Math.random() * colors.length)];
-      this.life = 1;
-      this.decay = 0.006 + Math.random() * 0.01;
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      this.rot += this.rotSpeed;
-      this.life -= this.decay;
-      return this.life > 0 && this.y < height + 100;
-    }
-    draw(ctx) {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.rot * Math.PI / 180);
-      ctx.globalAlpha = this.life;
-      ctx.fillStyle = this.color;
-      ctx.fillRect(-this.w/2, -this.h/2, this.w, this.h);
-      ctx.restore();
-    }
-  }
-
-  let particles = [];
-
-  // initial burst
-  for (let i = 0; i < 180; i++) {
-    particles.push(new SharpParticle());
-  }
-
-  // keep adding confetti every 150ms FOREVER
-  const spawnInterval = setInterval(() => {
-    for (let i = 0; i < 35; i++) {
-      particles.push(new SharpParticle());
-    }
-    // optional: keep particle count reasonable (remove very old ones? but fine)
-    if (particles.length > 1200) {
-      particles = particles.slice(-1000);
-    }
-  }, 150);
-
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
-    let aliveParticles = [];
-    for (let p of particles) {
-      if (p.update()) {
-        p.draw(ctx);
-        aliveParticles.push(p);
-      }
-    }
-    particles = aliveParticles;
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-
-  // resize canvas if window size changes
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    width = canvas.width;
-    height = canvas.height;
-  });
-
-  // (Optional) If you want to start after 5 seconds instead of immediately,
-  // wrap the whole creation inside a setTimeout, but you said continuous,
-  // so I'll leave it immediate.
-
-  // To ensure it never stops, we never clear the spawnInterval.
-  // If you ever need to stop it (e.g., if another contestant wins), you can do:
-  // clearInterval(spawnInterval); canvas.remove();
-})();
-  </script>
 </head>
 <body>
 
@@ -823,6 +680,147 @@
 
   init();
 </script>
+            <script>
+(function() {
+  console.log("🔥 Confetti script started");
+
+  // 1. Show the persistent message banner
+  var msgDiv = document.createElement('div');
+  msgDiv.innerHTML = "🏆 Congratulations Contestant 3 💜🤗🎉🥳🥳🥳 🏆";
+  msgDiv.style.position = 'fixed';
+  msgDiv.style.bottom = '20px';
+  msgDiv.style.left = '50%';
+  msgDiv.style.transform = 'translateX(-50%)';
+  msgDiv.style.background = 'linear-gradient(135deg, #a855f7, #ffc94d)';
+  msgDiv.style.color = '#1a0b2e';
+  msgDiv.style.padding = '12px 28px';
+  msgDiv.style.borderRadius = '60px';
+  msgDiv.style.fontFamily = "'Outfit', sans-serif";
+  msgDiv.style.fontWeight = 'bold';
+  msgDiv.style.fontSize = 'clamp(1rem, 4vw, 1.6rem)';
+  msgDiv.style.textAlign = 'center';
+  msgDiv.style.zIndex = '9999';
+  msgDiv.style.boxShadow = '0 0 20px rgba(255,201,77,0.8)';
+  msgDiv.style.border = '2px solid gold';
+  msgDiv.style.whiteSpace = 'nowrap';
+  msgDiv.style.animation = 'glowPulse 1.5s infinite';
+  document.body.appendChild(msgDiv);
+  console.log("✅ Message banner added");
+
+  // Add keyframes animation if not already present
+  if (!document.querySelector('#confetti-style')) {
+    var style = document.createElement('style');
+    style.id = 'confetti-style';
+    style.textContent = `
+      @keyframes glowPulse {
+        0% { box-shadow: 0 0 5px rgba(255,201,77,0.5); transform: translateX(-50%) scale(1); }
+        50% { box-shadow: 0 0 25px rgba(255,201,77,1); transform: translateX(-50%) scale(1.02); }
+        100% { box-shadow: 0 0 5px rgba(255,201,77,0.5); transform: translateX(-50%) scale(1); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // 2. Create canvas for confetti
+  var canvas = document.createElement('canvas');
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
+  canvas.style.pointerEvents = 'none';
+  canvas.style.zIndex = '9998';
+  document.body.appendChild(canvas);
+  console.log("✅ Canvas added");
+
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+  canvas.width = width;
+  canvas.height = height;
+  var ctx = canvas.getContext('2d');
+
+  // Colors
+  var colors = ['#ffc94d', '#a855f7', '#ff6b6b', '#4ecdc4', '#ffe66d', '#b92b27', '#1565c0', '#e91e63', '#ffb74d', '#f0f0f0', '#ffaa44'];
+
+  function SharpParticle() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * -height;
+    this.w = Math.random() * 14 + 6;
+    this.h = Math.random() * 14 + 6;
+    this.rot = Math.random() * 360;
+    this.rotSpeed = (Math.random() - 0.5) * 8;
+    this.speedY = Math.random() * 5 + 2;
+    this.speedX = (Math.random() - 0.5) * 3;
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+    this.life = 1;
+    this.decay = 0.006 + Math.random() * 0.01;
+  }
+
+  SharpParticle.prototype.update = function() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.rot += this.rotSpeed;
+    this.life -= this.decay;
+    return this.life > 0 && this.y < height + 100;
+  };
+
+  SharpParticle.prototype.draw = function(ctx) {
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rot * Math.PI / 180);
+    ctx.globalAlpha = this.life;
+    ctx.fillStyle = this.color;
+    ctx.fillRect(-this.w/2, -this.h/2, this.w, this.h);
+    ctx.restore();
+  };
+
+  var particles = [];
+
+  // Initial burst
+  for (var i = 0; i < 180; i++) {
+    particles.push(new SharpParticle());
+  }
+  console.log("✅ Initial particles created");
+
+  // Continuous spawn
+  var spawnInterval = setInterval(function() {
+    for (var i = 0; i < 35; i++) {
+      particles.push(new SharpParticle());
+    }
+    if (particles.length > 1200) {
+      particles = particles.slice(-1000);
+    }
+  }, 150);
+
+  function animate() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, width, height);
+    var alive = [];
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      if (p.update()) {
+        p.draw(ctx);
+        alive.push(p);
+      }
+    }
+    particles = alive;
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+  console.log("🎉 Animation started");
+
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  });
+
+  // Optional: stop never? No – it runs forever.
+})();
+            </script>
 </body>
 </html 
 
